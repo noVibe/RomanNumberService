@@ -1,31 +1,31 @@
-
-import exception.InvalidInputException;
-import exception.InvalidRomanNumberException;
-import exception.UnexpectedResultException;
-import service.CalcService;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import enums.ArithmeticOperationForRoman;
+import model.RomanExpression;
+import model.SumRomanExpression;
+import service.RomanOperation;
+import service.RomeArabicConverter;
 
 public class Main {
     public static void main(String[] args) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Use 'break' to stop");
-            while (true) {
-                String input = reader.readLine();
-                if (input.equals("break")) {
-                    break;
-                }
-                try {
-                    CalcService c = new CalcService().setRestriction(10);
-                    c.calculate(input);
-                } catch (InvalidRomanNumberException | InvalidInputException | UnexpectedResultException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        //Converting
+        String convertToRoman = RomeArabicConverter.convert(22);
+        Integer convertToInt = RomeArabicConverter.convert("MMX");
+
+        //Evaluation
+        String multiplication = RomanOperation.multiplyRomans("V", "II", "X");
+        String sum = RomanOperation.sumRomans("V", "II");
+        String division = RomanOperation.divideRomans("VII", "II", "I");
+        String subtraction = RomanOperation.subtractRomans("V", "II", "XX", "XXX");
+
+        String anyOperation = RomanOperation.evaluate(ArithmeticOperationForRoman.SUM, "C", "MCX");
+
+
+        //Lazy evaluation
+        RomanExpression sumExpression = new SumRomanExpression( "V", "X", "I");
+        String sumExpressionResult = sumExpression.execute();
+
+        RomanExpression anyOperationExpression = new RomanExpression(ArithmeticOperationForRoman.DIVIDE, "XX", "X");
+        String anyOperationExpressionResult = anyOperationExpression.execute();
     }
 
 }
