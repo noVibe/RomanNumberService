@@ -1,4 +1,4 @@
-package service;
+package service.support_services;
 
 import enums.ArithmeticOperationForRoman;
 import exception.NotEnoughNumbersException;
@@ -8,11 +8,11 @@ import java.util.Arrays;
 import java.util.function.BinaryOperator;
 
 public class RomanOperation {
-    public static String sumRomans(String... romanNumber) {
+    private static String sumRomans(String... romanNumber) {
         return calculate(Integer::sum, romanNumber);
     }
 
-    public static String subtractRomans(String... romanNumber) {
+    private static String subtractRomans(String... romanNumber) {
         try {
             return calculate(((x, y) -> x - y), romanNumber);
         } catch (IllegalArgumentException e) {
@@ -20,11 +20,11 @@ public class RomanOperation {
         }
     }
 
-    public static String multiplyRomans(String... romanNumber) {
+    private static String multiplyRomans(String... romanNumber) {
         return calculate(((x, y) -> x * y), romanNumber);
     }
 
-    public static String divideRomans(String... romanNumber) {
+    private static String divideRomans(String... romanNumber) {
         try {
             return calculate(((x, y) -> x / y), romanNumber);
         } catch (IllegalArgumentException e) {

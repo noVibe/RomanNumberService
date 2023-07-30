@@ -1,7 +1,7 @@
 package model;
 
 import enums.ArithmeticOperationForRoman;
-import service.RomanOperation;
+import service.support_services.RomanOperation;
 
 public class RomanExpression {
     private String[] numbers;
@@ -13,16 +13,13 @@ public class RomanExpression {
     }
 
     public String execute() {
-        return switch (operation) {
-            case SUM -> RomanOperation.sumRomans(numbers);
-            case SUBTRACT -> RomanOperation.subtractRomans(numbers);
-            case DIVIDE -> RomanOperation.divideRomans(numbers);
-            case MULTIPLY -> RomanOperation.multiplyRomans(numbers);
-        };
+        return RomanOperation.evaluate(operation, numbers);
     }
 
     public String[] getNumbers() {
-        return numbers;
+        String[] arr = new String[numbers.length];
+        System.arraycopy(numbers, 0, arr, 0, numbers.length);
+        return arr;
     }
 
     public void setNumbers(String[] numbers) {
