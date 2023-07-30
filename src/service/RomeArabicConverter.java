@@ -2,7 +2,7 @@ package service;
 
 
 import exception.InvalidRomanNumberException;
-import exception.UnexpectedResultException;
+import exception.UnexpectedRomanResultException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ public class RomeArabicConverter {
             put("D", 500);
         }};
         private static final Map<Integer, String> arToRom = romToAr.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey ));
+                .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
 
         private static int get(String s) {
             return romToAr.get(s);
@@ -39,23 +39,24 @@ public class RomeArabicConverter {
     }
 
     private static String arabicToRome(int number) {
-        StringBuilder result = new StringBuilder();
-        try {
-            for (int i = 1, digit = number % 10; number > 0; i *= 10, number /= 10, digit = number % 10) {
-                result.insert(0, switch (digit) {
-                    case 0, 1, 2, 3 -> Num.get(i).repeat(digit);
-                    case 4, 9 -> Num.get(i) + Num.get(i * (1 + digit));
-                    default -> Num.get(i * 5) + Num.get(i).repeat(digit - 5);
-                });
-            }
-            if (result.indexOf("null") != -1) {
-                throw new NullPointerException();
-            }
-            return result.toString();
-        } catch (NullPointerException e) {
-            throw new UnexpectedResultException("Result is too big for Roman format.");
+        if (number < 1) {
+            throw new IllegalArgumentException("Negative value can't be converted to Roman: " + number);
         }
+        StringBuilder result = new StringBuilder();
+        for (int i = 1, digit = number % 10; number > 0; i *= 10, number /= 10, digit = number % 10) {
+            result.insert(0, switch (digit) {
+                case 0, 1, 2, 3 -> Num.get(i).repeat(digit);
+                case 4, 9 -> Num.get(i) + Num.get(i * (1 + digit));
+                default -> Num.get(i * 5) + Num.get(i).repeat(digit - 5);
+            });
+        }
+        if (result.indexOf("null") != -1) {
+            throw new UnexpectedRomanResultException("Result is too big for Roman format: " + number);
+        }
+        return result.toString();
     }
+
+
 
     private static int romeToArabic(String str) {
         return Arrays.stream(str.split("")).map(Num::get).reduce((x, y) -> x >= y ? x + y : y - x)
