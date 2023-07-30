@@ -1,21 +1,23 @@
 import enums.ArithmeticOperationForRoman;
 import model.RomanExpression;
 import model.SumRomanExpression;
-import service.RomanOperation;
-import service.RomeArabicConverter;
+import service.Roman;
+import service.support_services.RomanOperation;
 
 public class Main {
     public static void main(String[] args) {
+        //Checking
+        boolean isLegalRoman = Roman.isLegal("IIIV");
 
         //Converting
-        String convertToRoman = RomeArabicConverter.convert(22);
-        Integer convertToInt = RomeArabicConverter.convert("MMX");
+        String convertToRoman = Roman.convert(22);
+        Integer convertToInt = Roman.convert("MMX");
 
         //Evaluation
-        String multiplication = RomanOperation.multiplyRomans("V", "II", "X");
-        String sum = RomanOperation.sumRomans("V", "II");
-        String division = RomanOperation.divideRomans("VII", "II", "I");
-        String subtraction = RomanOperation.subtractRomans("V", "II", "XX", "XXX");
+        String multiplication = Roman.multiply("V", "II", "X");
+        String sum = Roman.sum("V", "II");
+        String division = Roman.divide("VII", "II", "I");
+        String subtraction = Roman.subtract("V", "II", "XX", "XXX");
 
         String anyOperation = RomanOperation.evaluate(ArithmeticOperationForRoman.SUM, "C", "MCX");
 
