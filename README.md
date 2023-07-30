@@ -12,4 +12,4 @@ Understanding the sequence, we can split the Arabic number by divisions to extra
 
 Roman to Arabic convertation works in a different way. Roman number is splitted in a stream of values of Roman digits. The reduce operator summarize or subtract each value depending on previous one.
 
-Verification of Roman number is a tricky part. After being converted to Arabic value, this Arabic value converts back to a Roman. Now both Romans are compared. Primordinal Roman number is invalid if this comparsion failed.
+Verification of Roman number is a tricky part. After being converted to Arabic value, this Arabic value is being converted back to a Roman. Now both Romans are compared. Primordinal Roman number is invalid if this comparsion failed.
