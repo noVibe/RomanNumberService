@@ -2,3 +2,14 @@
 ### - convert in both ways Roman - Arabic
 ### - evaluate Roman numbers in multiple ways (watch [Main](https://github.com/noVibe/RomeNumberService/blob/main/src/Main.java))
 ### - check if Roman number is possible
+
+How it works:
+
+Roman numbers and their Arabic values are stored in the map. Since values are unique, the opposite map is present as well.
+
+Arabic to Roman convertation is based on the sequence of extending values for Roman numbers.
+Understanding the sequence, we can split the Arabic number by divisions to extract needed Roman numbers by their value from map.
+
+Roman to Arabic convertation works in a different way. Roman number is splitted in a stream of values of Roman digits. The reduce operator summarize or subtract each value depending on previous one.
+
+Verification of Roman number is a tricky part. After being converted to Arabic value, this Arabic value converts back to a Roman. Now both Romans are compared. Primordinal Roman number is invalid if this comparsion failed.
