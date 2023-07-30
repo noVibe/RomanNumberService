@@ -8,7 +8,7 @@ How it works:
 Roman numbers and their Arabic values are stored in the map. Since values are unique, the opposite map is present as well.
 
 Arabic to Roman convertation is based on the sequence of extending values for Roman numbers.
-Understanding the sequence, we can split the Arabic number by divisions to extract needed Roman numbers by their value from map.
+Understanding the sequence, we can split the Arabic number by divisions to extract needed Roman digits by their value from map.
 
 Roman to Arabic convertation works in a different way. Roman number is splitted in a stream of values of Roman digits. The reduce operator summarize or subtract each value depending on previous one.
 
