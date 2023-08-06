@@ -1,9 +1,14 @@
 package model;
 
-import enums.ArithmeticOperationForRoman;
+import service.Roman;
 
 public class MultiplicationRomanExpression extends RomanExpression{
     public MultiplicationRomanExpression(String... numbers) {
-        super(ArithmeticOperationForRoman.MULTIPLY, numbers);
+        super(numbers);
+    }
+
+    @Override
+    public String execute() {
+        return Roman.multiply(numbers);
     }
 }
