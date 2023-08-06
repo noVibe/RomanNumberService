@@ -1,4 +1,4 @@
-package service.support_services;
+package service;
 
 
 import exception.InvalidRomanNumberException;
@@ -6,8 +6,9 @@ import exception.UnexpectedRomanResultException;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class RomeArabicConverter {
+class RomeArabicConverter {
     private final static class Num {
         private static final Map<String, Integer> romToAr = new HashMap<>() {{
             put("I", 1);
@@ -30,11 +31,11 @@ public class RomeArabicConverter {
         }
     }
 
-    public static String convert(int n) {
+    static String convert(int n) {
         return arabicToRome(n);
     }
 
-    public static int convert(String s) {
+    static int convert(String s) {
         return romeToArabic(s);
     }
 
@@ -59,7 +60,13 @@ public class RomeArabicConverter {
 
 
     private static int romeToArabic(String str) {
-        return Arrays.stream(str.split("")).map(Num::get).reduce((x, y) -> x >= y ? x + y : y - x)
+        return Stream.iterate(str.length() - 1, i -> i - 1)
+                .limit(str.length())
+                .map(str::charAt)
+                .map(String::valueOf)
+                .map(Num::get)
+                .reduce((sum, num) ->
+                        num * 4 < sum ? sum - num : sum + num)
                 .filter(x -> str.equals(arabicToRome(x)))
                 .orElseThrow(() -> new InvalidRomanNumberException("Impossible Roman number: " + str));
     }

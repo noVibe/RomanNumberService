@@ -1,9 +1,14 @@
 package model;
 
-import enums.ArithmeticOperationForRoman;
+import service.Roman;
 
 public class SumRomanExpression extends RomanExpression{
     public SumRomanExpression(String... numbers) {
-        super(ArithmeticOperationForRoman.SUM, numbers);
+        super(numbers);
+    }
+
+    @Override
+    public String execute() {
+        return Roman.sum(numbers);
     }
 }

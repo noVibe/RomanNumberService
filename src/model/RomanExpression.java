@@ -1,20 +1,14 @@
 package model;
 
-import enums.ArithmeticOperationForRoman;
-import service.support_services.RomanOperation;
+public abstract class RomanExpression {
+    protected String[] numbers;
 
-public class RomanExpression {
-    private String[] numbers;
-    private ArithmeticOperationForRoman operation;
-
-    public RomanExpression(ArithmeticOperationForRoman operation, String... numbers) {
+    public RomanExpression(String... numbers) {
         this.numbers = numbers;
-        this.operation = operation;
     }
 
-    public String execute() {
-        return RomanOperation.evaluate(operation, numbers);
-    }
+    public abstract String execute();
+
 
     public String[] getNumbers() {
         String[] arr = new String[numbers.length];
@@ -24,13 +18,5 @@ public class RomanExpression {
 
     public void setNumbers(String[] numbers) {
         this.numbers = numbers;
-    }
-
-    public ArithmeticOperationForRoman getOperation() {
-        return operation;
-    }
-
-    public void setOperation(ArithmeticOperationForRoman operation) {
-        this.operation = operation;
     }
 }
