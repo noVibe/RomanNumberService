@@ -1,22 +1,19 @@
 package model;
 
+import java.util.Arrays;
+
 public abstract class RomanExpression {
     protected String[] numbers;
+    protected String result;
 
     public RomanExpression(String... numbers) {
         this.numbers = numbers;
     }
 
-    public abstract String execute();
+    public abstract String getResult();
 
 
     public String[] getNumbers() {
-        String[] arr = new String[numbers.length];
-        System.arraycopy(numbers, 0, arr, 0, numbers.length);
-        return arr;
-    }
-
-    public void setNumbers(String[] numbers) {
-        this.numbers = numbers;
+        return Arrays.copyOf(numbers, numbers.length);
     }
 }

@@ -8,7 +8,10 @@ public class MultiplicationRomanExpression extends RomanExpression{
     }
 
     @Override
-    public String execute() {
-        return Roman.multiply(numbers);
+    public String getResult() {
+        if (result == null) {
+            result = Roman.multiply(numbers);
+        }
+        return result;
     }
 }

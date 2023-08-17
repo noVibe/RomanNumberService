@@ -8,7 +8,10 @@ public class SubtractRomanExpression extends RomanExpression{
     }
 
     @Override
-    public String execute() {
-        return Roman.subtract(numbers);
+    public String getResult() {
+        if (result == null) {
+            result = Roman.subtract(numbers);
+        }
+        return result;
     }
 }
