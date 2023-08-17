@@ -10,6 +10,6 @@ Roman numbers and their Arabic values are stored in the map. Since values are un
 Arabic to Roman convertation is based on the sequence of extending values for Roman numbers.
 Understanding the sequence, we can split the Arabic number by divisions to extract needed Roman digits by their value from the map.
 
-Roman to Arabic convertation works in a different way. Roman number is splitted in a stream of values of Roman digits. The reduce operator summarize or subtract each value depending on previous one.
+Roman to Arabic convertation works in a different way. Roman number is splitted to a stream of values of Roman digits. The reduce operator summarize or subtract each value depending on current result.
 
 Verification of Roman number is a tricky part. After being converted to Arabic value, this Arabic value is being converted back to a Roman. Primordinal Roman number is invalid if comparsion with the new one was failed.
