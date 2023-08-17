@@ -8,7 +8,10 @@ public class SumRomanExpression extends RomanExpression{
     }
 
     @Override
-    public String execute() {
-        return Roman.sum(numbers);
+    public String getResult() {
+        if (result == null) {
+            result = Roman.sum(numbers);
+        }
+        return result;
     }
 }

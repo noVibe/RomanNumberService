@@ -1,23 +1,24 @@
 package service;
 
-import enums.ArithmeticOperationForRoman;
 import exception.InvalidRomanNumberException;
 
-public class Roman {
+import static service.RomanArithmeticOperation.*;
+
+public final class Roman {
     public static String sum(String... romanNumbers) {
-        return RomanOperation.evaluate(ArithmeticOperationForRoman.SUM, romanNumbers);
+        return RomanOperationService.evaluate(SUM, romanNumbers);
     }
 
     public static String subtract(String... romanNumbers) {
-        return RomanOperation.evaluate(ArithmeticOperationForRoman.SUBTRACT, romanNumbers);
+        return RomanOperationService.evaluate(SUBTRACT, romanNumbers);
     }
 
     public static String multiply(String... romanNumbers) {
-        return RomanOperation.evaluate(ArithmeticOperationForRoman.MULTIPLY, romanNumbers);
+        return RomanOperationService.evaluate(MULTIPLY, romanNumbers);
     }
 
     public static String divide(String... romanNumbers) {
-        return RomanOperation.evaluate(ArithmeticOperationForRoman.DIVIDE, romanNumbers);
+        return RomanOperationService.evaluate(DIVIDE, romanNumbers);
     }
 
     public static int convert(String romanNumber) {
@@ -28,7 +29,7 @@ public class Roman {
         return RomeArabicConverter.convert(romanNumber);
     }
 
-    public static boolean isLegal(String romanNumber) {
+    public static boolean isValid(String romanNumber) {
         try {
             RomeArabicConverter.convert(romanNumber);
             return true;

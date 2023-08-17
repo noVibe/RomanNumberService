@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class RomeArabicConverter {
+final class RomeArabicConverter {
     private final static class Num {
         private static final Map<String, Integer> romToAr = new HashMap<>() {{
             put("I", 1);
@@ -39,20 +39,22 @@ class RomeArabicConverter {
         return romeToArabic(s);
     }
 
-    private static String arabicToRome(int number) {
+    private static String arabicToRome(int arabicNumber) {
+        int number = arabicNumber;
         if (number < 1) {
             throw new IllegalArgumentException("Negative value can't be converted to Roman: " + number);
         }
         StringBuilder result = new StringBuilder();
-        for (int i = 1, digit = number % 10; number > 0; i *= 10, number /= 10, digit = number % 10) {
-            result.insert(0, switch (digit) {
-                case 0, 1, 2, 3 -> Num.get(i).repeat(digit);
-                case 4, 9 -> Num.get(i) + Num.get(i * (1 + digit));
-                default -> Num.get(i * 5) + Num.get(i).repeat(digit - 5);
-            });
-        }
-        if (result.indexOf("null") != -1) {
-            throw new UnexpectedRomanResultException("Result is too big for Roman format: " + number);
+        try {
+            for (int rank = 1, digit = number % 10; number > 0; rank *= 10, number /= 10, digit = number % 10) {
+                result.insert(0, switch (digit) {
+                    case 0, 1, 2, 3 -> Num.get(rank).repeat(digit);
+                    case 4, 9 -> Num.get(rank) + Num.get(rank * (1 + digit));
+                    default -> Num.get(rank * 5) + Num.get(rank).repeat(digit - 5);
+                });
+            }
+        } catch (NullPointerException e){
+            throw new UnexpectedRomanResultException("Result is too big for Roman format: " + arabicNumber);
         }
         return result.toString();
     }
